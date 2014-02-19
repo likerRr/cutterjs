@@ -1,83 +1,227 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
     <title>Cutterjs by likerRr</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
-    <header>
-      <div class="inner">
+
+      <header>
         <h1>Cutterjs</h1>
-        <h2>Cut any element from web page</h2>
-        <a href="https://github.com/likerRr/cutterjs" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+        <p>Cut any element from web page</p>
+      </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+      <div id="banner">
+        <span id="logo"></span>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+        <a href="https://github.com/likerRr/cutterjs" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/likerRr/cutterjs/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/likerRr/cutterjs/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h2>
+<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
+
+<pre><code>$ git clone git@github.com:likerRr/cutterjs.git
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<ol>
+<li>Download .zip or clone .git</li>
+<li>Extract or copy files to project scripts folder</li>
+<li>Include downloaded files and jQuery library in your project</li>
+</ol><pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="cutter.min.js"&gt;
+</code></pre>
+
+<h2>
+<a name="how-to" class="anchor" href="#how-to"><span class="octicon octicon-link"></span></a>How to</h2>
+
+<p>You only need to initialize plugin with jQuery element, that wraps area where you want to cut:</p>
+
+<pre><code>$('body').cutter('init');
+</code></pre>
+
+<p>By default, init method have some default options:</p>
+
+<ol>
+<li>Elements under cursor appear with border</li>
+<li>On cut action element will change it display style to <code>display: none</code>
+</li>
+<li>On restore action element returns inherit display property</li>
+</ol><h2>
+<a name="customizing" class="anchor" href="#customizing"><span class="octicon octicon-link"></span></a>Customizing</h2>
+
+<p>You can override almost all actions used in plugin just in <code>init</code> method with second parameter</p>
+
+<blockquote>
+<p>All callback methods accept one parameter - element in action</p>
+</blockquote>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="mouseover" class="anchor" href="#mouseover"><span class="octicon octicon-link"></span></a>mouseOver</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Handle, when mouse moves over element in target area:</p>
+
+<pre><code>$('body').cutter('init', {
+  mouseOver: function(el) {
+    el.data('border', el.css('border'));
+    el.css('border', 'dotted gray 1px');
+  },
+});
+</code></pre>
+
+<p>Now hovered elements will have dotted gray border</p>
+
+<blockquote>
+<p>Please, note, you need to store default data with <code>data</code> method to be able to restore previous element state</p>
+</blockquote>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="mouseout" class="anchor" href="#mouseout"><span class="octicon octicon-link"></span></a>mouseOut</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Handle, when mouse moves out from element in target area:</p>
+
+<pre><code>$('body').cutter('init', {
+  mouseOut: function(el) {
+    el.css('border', el.data('border'));
+  },
+});
+</code></pre>
+
+<blockquote>
+<p>Now we can restore default value of <code>border</code> property</p>
+</blockquote>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="oncut" class="anchor" href="#oncut"><span class="octicon octicon-link"></span></a>onCut</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>You can use that option to set up, how elements will be removed</p>
+
+<pre><code>$('body').cutter('init', {
+  onCut: function(el) {
+    el.data('opacity', el.css('opacity'));
+    el.css('opacity', '0.3');
+  },
+});
+</code></pre>
+
+<blockquote>
+<p>Note! You need to store default element state to be able to restore it</p>
+</blockquote>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="aftercut" class="anchor" href="#aftercut"><span class="octicon octicon-link"></span></a>afterCut</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
+<p>You may need to do list with deleted elements to be able to restore them, so that method will help you</p>
 
-        <aside id="sidebar">
-          <a href="https://github.com/likerRr/cutterjs/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/likerRr/cutterjs/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+<pre><code>var deletedElements = [];
+...
+$('body').cutter('init', {
+   afterCut: function(el) {deletedElements .push(el);},
+});
+</code></pre>
 
-          <p class="repo-owner"><a href="https://github.com/likerRr/cutterjs"></a> is maintained by <a href="https://github.com/likerRr">likerRr</a>.</p>
+<h3>
+<a name="onrestore" class="anchor" href="#onrestore"><span class="octicon octicon-link"></span></a>onRestore</h3>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+<p>Function will handle when you call <code>restore</code> method</p>
+
+<pre><code>$('body').cutter('init', {
+  onRestore: function(el) {
+    el.css('opacity', el.data('opacity'));
+  }
+});
+</code></pre>
+
+<h2>
+<a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a>Methods</h2>
+
+<h3>
+<a name="stop" class="anchor" href="#stop"><span class="octicon octicon-link"></span></a>stop</h3>
+
+<p>I think that "cut mode" will not be active all the time, so we need to be able to stop it</p>
+
+<pre><code>var bodyArea = $('body').cutter('init');
+...
+bodyArea.cutter('stop');
+</code></pre>
+
+<p>After calling this method all actions will be suspended</p>
+
+<h3>
+<a name="start" class="anchor" href="#start"><span class="octicon octicon-link"></span></a>start</h3>
+
+<p>To restore "cut mode" call <code>start</code> method</p>
+
+<pre><code>var bodyArea = $('body').cutter('init');
+...
+bodyArea.cutter('stop');
+...
+bodyArea.cutter('start');
+</code></pre>
+
+<h3>
+<a name="deleted" class="anchor" href="#deleted"><span class="octicon octicon-link"></span></a>deleted</h3>
+
+<p>You can also get all deleted items for current area, just use <code>deleted</code> method</p>
+
+<pre><code>var bodyArea = $('body').cutter('init');
+...
+var deletedItems = bodyArea.cutter('deleted');
+</code></pre>
+
+<h3>
+<a name="restore" class="anchor" href="#restore"><span class="octicon octicon-link"></span></a>restore</h3>
+
+<p>Finally you need to be able to restore deleted elements. Method <code>restore</code> will help you. It accepts one optional parameter - deleted jQuery element or empty to restore all elements</p>
+
+<pre><code>var $lastDeleted;
+...
+var bodyArea = $('body').cutter('init', {
+   afterCut: function(el) {$lastDeleted = el;},
+});
+// restore one
+bodyArea.cutter('restore', $lastDeleted);
+// restore all
+bodyArea.cutter('restore');
+</code></pre>
+
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>Coming soon. Now you can try it yourself. Have fun!</p>
+
+<h2>
+<a name="licence" class="anchor" href="#licence"><span class="octicon octicon-link"></span></a>Licence</h2>
+
+<p>Project under MIT licence, feel free to use and edit</p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/likerRr">likerRr</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
     </div>
-
-  
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
