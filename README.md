@@ -1,4 +1,4 @@
-cutterjs
+Cutter.js
 ========
 
-Cut any element from web page
+Cut any elements from web page!
