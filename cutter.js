@@ -6,17 +6,16 @@
         $lastInstance;
 
     // add handle to keys to cut elements
-    $(document).on('keypress', function(e){
-        var key = e.keyCode,
-            symbolicKey = e.which,
+    $(document).on('keydown', function(e){
+        var symbolicKey = e.which,
         // "delete" key
             deleteKeyCode = 46,
         // "control" key
             ctrlKey = e.ctrlKey,
         // "x" key
-            xKeyCode = 120;
+            xKeyCode = 88;
         if ($lastElement !== undefined && $lastElement.length == 1) {
-            if (key === deleteKeyCode || (symbolicKey == xKeyCode && ctrlKey == true)) {
+            if (symbolicKey === deleteKeyCode || (symbolicKey == xKeyCode && ctrlKey == true)) {
                 // push deleted item in array to subsequent access
                 $lastInstance.deleted.push($lastElement);
 //					$lastElement.fadeOut('fast');
