@@ -13,6 +13,8 @@ var sectionHeight = function() {
 $(window).resize(sectionHeight);
 
 $(document).ready(function(){
+  $('#restore-btn').hide();
+  $('section').cutter('init').cutter('stop');
   $("section h1, section h2").each(function(){
     $("nav ul").append("<li class='tag-" + this.nodeName.toLowerCase() + "'><a href='#" + $(this).text().toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,'') + "'>" + $(this).text() + "</a></li>");
     $(this).attr("id",$(this).text().toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,''));
@@ -30,6 +32,26 @@ $(document).ready(function(){
   sectionHeight();
   
   $('img').load(sectionHeight);
+  $('#restore-btn').on('click', function(e){
+      e.preventDefault();
+      $('section').cutter('restore');
+  });
+  $('#cut-btn').on('click', function(e){
+      e.preventDefault();
+      var $this = $(this),
+          clicked = $this.data('clicked'),
+          $restoreBtn = $('#restore-btn');
+      if (!clicked) {
+          $('section').cutter('start');
+          $this.data('clicked', true).text('Stop cut!');
+          $restoreBtn.show();
+      }
+      else {
+          $this.data('clicked', false).text('Start to cut!');
+          $('section').cutter('stop');
+          $restoreBtn.hide();
+      }
+  });
 });
 
 fixScale = function(doc) {

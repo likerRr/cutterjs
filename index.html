@@ -6,7 +6,9 @@
     <title>Cutterjs by likerRr</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="javascripts/cutter.min.js"></script>
     <script src="javascripts/main.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,13 +20,15 @@
 
       <header>
         <h1>Cutterjs</h1>
-        <p>Cut any element from web page</p>
+        <p>Cut any elements from web page</p>
       </header>
 
       <div id="banner">
         <span id="logo"></span>
 
         <a href="https://github.com/likerRr/cutterjs" class="button fork"><strong>View On GitHub</strong></a>
+        <a href="https://github.com/likerRr/cutterjs" class="button fork" id="cut-btn" style="margin-left: -180px;"><strong>Start to cut!</strong></a>
+        <a href="https://github.com/likerRr/cutterjs" class="button fork" id="restore-btn" style="margin-left: -90px;"><strong>Restore All</strong></a>
         <div class="downloads">
           <span>Downloads:</span>
           <ul>
@@ -207,9 +211,9 @@ bodyArea.cutter('restore');
 </code></pre>
 
 <h2>
-<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Example</h2>
 
-<p>Coming soon. Now you can try it yourself. Have fun!</p>
+<p>Just press <code>Start</code> button at navigation bar and enjoy!</p>
 
 <h2>
 <a name="licence" class="anchor" href="#licence"><span class="octicon octicon-link"></span></a>Licence</h2>
@@ -222,6 +226,5 @@ bodyArea.cutter('restore');
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
   </body>
 </html>
