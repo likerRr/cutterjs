@@ -28,25 +28,24 @@
     var methods = {
         init: function(options) {
             var opts = $.extend({
-                // function that will handle after cutting
-                afterCut: undefined,
-                // function that will handle when mouse moves over the element
-                mouseOver: undefined,
-                // function that will handle when mouse moves out ot element
-                mouseOut: undefined,
-                onCut: undefined,
-                onRestore: undefined
-            }, options);
-
-            var $instance = {
-                // elements that can be cut
-                container: this,
-                options: opts,
-                // deleted child inside container
-                deleted: []
-            };
-            this.cutter('start');
+                    // function that will handle after cutting
+                    afterCut: undefined,
+                    // function that will handle when mouse moves over the element
+                    mouseOver: undefined,
+                    // function that will handle when mouse moves out ot element
+                    mouseOut: undefined,
+                    onCut: undefined,
+                    onRestore: undefined
+                }, options),
+                $instance = {
+                    // elements that can be cut
+                    container: this,
+                    options: opts,
+                    // deleted child inside container
+                    deleted: []
+                };
             this.data('instance', $instance);
+            this.cutter('start');
 
             return this;
         },
@@ -130,7 +129,8 @@
             }
             else {
                 $target.css({
-                    border: $target.data('border')
+                    border: $target.data('border'),
+                    cursor: 'default'
                 });
             }
         },
